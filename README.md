@@ -1,322 +1,378 @@
-# Vibe Check MCP
+# Vibe Check Enhanced MCP Server
 
-<p align="center"><b>KISS overzealous agents goodbye. Plug & play agent oversight tool.</b></p>
+**Project-agnostic constitutional AI system with file-based rules, automatic detection, and per-project isolation.**
 
-<p align="center">
-  <b>Based on research:</b><br/>
-  In our study agents calling Vibe Check improved success +27% and halved harmful actions -41%
-</p>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
 
-<p align="center">
-  <a href="https://www.researchgate.net/publication/394946231_Do_AI_Agents_Need_Mentors_Evaluating_Chain-Pattern_Interrupt_CPI_for_Oversight_and_Reliability?channel=doi&linkId=68ad6178ca495d76982ff192&showFulltext=true">
-    <img src="https://img.shields.io/badge/Research-CPI%20%28MURST%29-blue?style=flat-square" alt="CPI Research">
-  </a>
-  <a href="https://github.com/modelcontextprotocol/servers"><img src="https://img.shields.io/badge/Anthropic%20MCP-featured-111?labelColor=111&color=555&style=flat-square" alt="Anthropic MCP: listed"></a>
-  <a href="https://registry.modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP%20Registry-listed-555?labelColor=111&style=flat-square" alt="MCP Registry"></a>
-  <a href="https://www.pulsemcp.com/servers/pv-bhat-vibe-check">
-    <img src="https://img.shields.io/badge/PulseMCP-Most%20Popular%20(Oct 2025)-0b7285?style=flat-square" alt="PulseMCP: Most Popular (this week)">
-  </a>
-  <a href="https://github.com/PV-Bhat/vibe-check-mcp-server/actions/workflows/ci.yml"><img src="https://github.com/PV-Bhat/vibe-check-mcp-server/actions/workflows/ci.yml/badge.svg" alt="CI passing"></a>
-  <a href="https://smithery.ai/server/@PV-Bhat/vibe-check-mcp-server"><img src="https://smithery.ai/badge/@PV-Bhat/vibe-check-mcp-server" alt="Smithery Badge"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b7285?style=flat-square" alt="MIT License"></a>
-</p>
+---
 
-<p align="center">
-  <sub> Featured on PulseMCP “Most Popular (This Week)” • 5k+ monthly calls on Smithery.ai • research-backed oversight • STDIO + streamable HTTP transport</sub>
-</p>
+> **Note:** This is an enhanced fork of the [original vibe-check-mcp-server](https://github.com/PV-Bhat/vibe-check-mcp-server) by [Pruthvi Bhat](https://pruthvibhat.com/), tailored for local deployment with file-based constitutional rules and project-agnostic workflows.
 
-<img width="500" height="300" alt="Gemini_Generated_Image_kvdvp4kvdvp4kvdv" src="https://github.com/user-attachments/assets/ff4d9efa-2142-436d-b1df-2a711a28c34e" />
+---
 
-[![Version](https://img.shields.io/badge/version-2.7.4-purple)](https://github.com/PV-Bhat/vibe-check-mcp-server)
-[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/PV-Bhat/vibe-check-mcp-server)](https://archestra.ai/mcp-catalog/pv-bhat__vibe-check-mcp-server)
-[![Security 4.3★/5 on MSEEP](https://mseep.ai/badge.svg)](https://mseep.ai/app/a2954e62-a3f8-45b8-9a03-33add8b92599)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet)](CONTRIBUTING.md)
+## 🚀 What Is This?
 
-*Plug-and-play mentor layer that stops agents from over-engineering and keeps them on the minimal viable path — research-backed MCP server keeping LLMs aligned, reflective and safe.*
+This enhanced version of Vibe Check MCP provides:
 
-<div align="center">
-  <a href="https://github.com/PV-Bhat/vibe-check-mcp-server">
-    <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/github.svg" width="40" height="40" alt="GitHub" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://registry.modelcontextprotocol.io">
-    <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/anthropic.svg" width="40" height="40" alt="Anthropic MCP Registry" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://smithery.ai/server/@PV-Bhat/vibe-check-mcp-server">
-    <img src="https://unpkg.com/@lobehub/icons-static-svg@latest/icons/smithery.svg" width="40" height="40" alt="Smithery" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://www.pulsemcp.com/servers/pv-bhat-vibe-check">
-    <img src="https://www.pulsemcp.com/favicon.ico" width="40" height="40" alt="PulseMCP" />
-  </a>
-</div>
+- ✅ **File-Based Constitutional Rules** - JSON-based rules with inheritance (Base → Project → Session)
+- ✅ **Automatic Project Detection** - Zero manual configuration, auto-detects project name from directory path
+- ✅ **Per-Project Isolation** - Each project gets its own `history-{projectName}.json` and `vibe-log-{projectName}.json`
+- ✅ **Metacognitive Vibe Checking** - Catch tunnel vision before cascading errors (from original vibe-check)
+- ✅ **Pattern Learning** - Record mistakes and solutions for institutional memory
+- ✅ **Hot Reload (Optional)** - Live rule updates during development without restart
+- ✅ **Pre-Flight Validation** - Catch configuration errors before runtime
 
-<div align="center">
-  <em>Trusted by developers across MCP platforms and registries</em>
-</div>
+---
 
-## Quickstart (npx)
+## 🎯 Key Differences from Original
 
-Run the server directly from npm without a local installation. Requires Node **>=20**.
+| Feature | Original vibe-check-mcp | This Enhanced Version |
+|---------|------------------------|----------------------|
+| **Deployment** | Global npm package (`npx @pv-bhat/vibe-check-mcp`) | **Local per-project installation** |
+| **Constitutional Rules** | Runtime-only (in-memory via `update_constitution`) | **File-based with JSON inheritance** |
+| **Project Awareness** | Single global instance | **Per-project isolation with auto-detection** |
+| **Configuration** | Manual environment variables | **Auto-configured via init script** |
+| **Storage** | Generic filenames (`history.json`, `vibe-log.json`) | **Project-specific filenames** (`history-{projectName}.json`) |
+| **Setup** | npm install + manual config | **Zero-config with automatic setup** |
+
+---
+
+## 📦 Local Installation (Recommended)
+
+This enhanced version is designed to run **locally per project**, not as a global npm package.
+
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm 9.x or higher
+
+### Installation
 
 ```bash
-# Start the server with stdio transport
-npx -y @pv-bhat/vibe-check-mcp start --stdio
+# 1. Navigate to your project directory
+cd /path/to/your/project
+
+# 2. Create .vibe-check directory structure
+mkdir -p .vibe-check/enhanced-mcp-server
+
+# 3. Clone or copy this enhanced MCP server
+# (From GitHub repo or local source)
+cp -r /path/to/enhanced-mcp-server/* .vibe-check/enhanced-mcp-server/
+
+# 4. Install dependencies
+cd .vibe-check/enhanced-mcp-server
+npm install
+
+# 5. Build the server
+npm run build
+
+# 6. Run validation (optional but recommended)
+npm run validate
 ```
 
-For client integrations (like Claude Desktop or Cursor), add this entry to your MCP configuration:
+---
+
+## 🏗️ Directory Structure After Installation
+
+```
+your-project/
+├── .vibe-check/
+│   ├── constitutional-rules.json          # Project-specific rules (auto-created)
+│   ├── shared/
+│   │   ├── base-constitutional-rules.json # 12 universal base rules
+│   │   └── schema/
+│   │       └── constitutional-rules.schema.json
+│   │
+│   ├── enhanced-mcp-server/               # This MCP server (built)
+│   │   ├── build/
+│   │   ├── src/
+│   │   └── package.json
+│   │
+│   ├── history-your-project.json          # Auto-created on first vibe_check
+│   └── vibe-log-your-project.json         # Auto-created on first vibe_learn
+│
+└── .mcp.json                              # MCP configuration (create manually)
+```
+
+---
+
+## ⚙️ Configuration
+
+### 1. Create `.mcp.json` in your project root
 
 ```json
 {
   "mcpServers": {
-    "vibe-check-mcp": {
-      "command": "npx",
-      "args": ["-y", "@pv-bhat/vibe-check-mcp", "start", "--stdio"]
+    "pv-bhat-vibe-check-mcp-server": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/absolute/path/to/your-project/.vibe-check/enhanced-mcp-server/build/index.js"
+      ],
+      "env": {
+        "MCP_TRANSPORT": "stdio",
+        "GEMINI_API_KEY": "your-gemini-api-key",
+        "DEFAULT_LLM_PROVIDER": "gemini",
+        "DEFAULT_MODEL": "gemini-2.5-flash",
+        "USE_LEARNING_HISTORY": "true",
+        "VIBE_CHECK_STORAGE_DIR": "/absolute/path/to/your-project/.vibe-check",
+        "VIBE_CHECK_RULES_FILE": "/absolute/path/to/your-project/.vibe-check/constitutional-rules.json",
+        "VIBE_CHECK_HOT_RELOAD": "false"
+      }
     }
   }
 }
 ```
 
-The server will be downloaded and run on-demand. For detailed client setup and other commands like `install` and `doctor`, see the full documentation below.
+**Important:** Use **absolute paths** for all file references.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=PV-Bhat/vibe-check-mcp-server&type=Date)](https://www.star-history.com/#PV-Bhat/vibe-check-mcp-server&Date)
+### 2. Create constitutional rules file
 
-### Recognition
-- Featured on PulseMCP “Most Popular (This Week)” front page (week of 13 Oct 2025) [🔗](https://www.pulsemcp.com/servers/pv-bhat-vibe-check)
-- Listed in Anthropic’s official Model Context Protocol repo [🔗](https://github.com/modelcontextprotocol/servers?tab=readme-overview#-community-servers)
-- Discoverable in the official MCP Registry [🔗](https://registry.modelcontextprotocol.io/v0/servers?search=vibe-check-mcp)
-- Featured on Sean Kochel's Top 9 MCP servers for vibe coders [🔗](https://youtu.be/2wYO6sdQ9xc?si=mlVo4iHf_hPKghxc&t=1331)
+Create `.vibe-check/constitutional-rules.json`:
 
-## Table of Contents
-- [Quickstart (npx)](#quickstart-npx)
-- [What is Vibe Check MCP?](#what-is-vibe-check-mcp)
-- [Overview](#overview)
-- [The Problem: Pattern Inertia & Reasoning Lock-In](#the-problem-pattern-inertia--reasoning-lock-in)
-- [Key Features](#key-features)
-- [What's New](#whats-new-in-v274)
-- [Development Setup](#development-setup)
-- [Release](#release)
-- [Usage Examples](#usage-examples)
-- [Adaptive Metacognitive Interrupts (CPI)](#adaptive-metacognitive-interrupts-cpi)
-- [Agent Prompting Essentials](#agent-prompting-essentials)
-- [When to Use Each Tool](#when-to-use-each-tool)
-- [Documentation](#documentation)
-- [Research & Philosophy](#research--philosophy)
-- [Security](#security)
-- [Roadmap](#roadmap)
-- [Contributors & Community](#contributors--community)
-- [FAQ](#faq)
-- [Listed on](#find-vibe-check-mcp-on)
-- [Credits & License](#credits--license)
+```json
+{
+  "$schema": "shared/schema/constitutional-rules.schema.json",
+  "version": "1.0.0",
+  "extends": ["shared/base-constitutional-rules.json"],
+  "description": "Constitutional rules for your-project",
+  "rules": {
+    "your-project-rule-1": {
+      "id": "your-project-rule-1",
+      "name": "Your Project Rule Example",
+      "description": "ALWAYS follow your-project-specific patterns",
+      "category": "best-practices",
+      "severity": "HIGH",
+      "enabled": true
+    }
+  }
+}
+```
+
+### 3. Restart Claude Code
+
+After configuration, restart Claude Code to load the enhanced MCP server.
+
 ---
-## What is Vibe Check MCP?
 
-Vibe Check MCP keeps agents on the minimal viable path and escalates complexity only when evidence demands it. Vibe Check MCP is a lightweight server implementing Anthropic's [Model Context Protocol](https://anthropic.com/mcp). It acts as an **AI meta-mentor** for your agents, interrupting pattern inertia with **Chain-Pattern Interrupts (CPI)** to prevent Reasoning Lock-In (RLI). Think of it as a rubber-duck debugger for LLMs – a quick sanity check before your agent goes down the wrong path.
+## 🎯 How It Works: Automatic Project Detection
 
-## Overview
+The server automatically extracts your project name from the directory path:
 
-Vibe Check MCP pairs a metacognitive signal layer with CPI so agents can pause when risk spikes. Vibe Check surfaces traits, uncertainty, and risk scores; CPI consumes those triggers and enforces an intervention policy before the agent resumes. See the [CPI integration guide](./docs/integrations/cpi.md) and the CPI repo at https://github.com/PV-Bhat/cpi for wiring details.
+```
+VIBE_CHECK_STORAGE_DIR = /path/to/MY-PROJECT/.vibe-check
+                                ↓ (auto-extract)
+PROJECT_NAME = "MY-PROJECT"
+                                ↓
+history-MY-PROJECT.json     ✅ Auto-created
+vibe-log-MY-PROJECT.json    ✅ Auto-created
+```
 
-Vibe Check invokes a second LLM to give meta-cognitive feedback to your main agent. Integrating vibe_check calls into agent system prompts and instructing tool calls before irreversible actions significantly improves agent alignment and common-sense. The high-level component map: [docs/architecture.md](./docs/architecture.md), while the CPI handoff diagram and example shim are captured in [docs/integrations/cpi.md](./docs/integrations/cpi.md).
+No manual configuration needed! Each project automatically gets isolated storage.
 
-## The Problem: Pattern Inertia & Reasoning Lock-In
+---
 
-Large language models can confidently follow flawed plans. Without an external nudge they may spiral into overengineering or misalignment. Vibe Check provides that nudge through short reflective pauses, improving reliability and safety.
+## 📚 File-Based Constitutional Rules with Inheritance
 
-## Key Features
+### Base Rules (12 Universal)
 
-| Feature | Description | Benefits |
-|---------|-------------|----------|
-| **CPI Adaptive Interrupts** | Phase-aware prompts that challenge assumptions | alignment, robustness |
-| **Multi-provider LLM** | Gemini, OpenAI, Anthropic, and OpenRouter support | flexibility |
-| **History Continuity** | Summarizes prior advice when `sessionId` is supplied | context retention |
-| **Optional vibe_learn** | Log mistakes and fixes for future reflection | self-improvement |
+Located in `.vibe-check/shared/base-constitutional-rules.json`:
 
-## What's New in v2.7.4
+1. **No Time Constraints** (CRITICAL)
+2. **Read Before Edit** (CRITICAL)
+3. **Parallel Tool Execution** (HIGH)
+4. **Critical Assessment Approach** (HIGH)
+5. **Evidence-Based Conclusions** (HIGH)
+6. **Substance Over Praise** (MEDIUM)
+7. **Use Task Tool for Open-Ended Search** (MEDIUM)
+8. **Use Specialized Tools Over Bash** (MEDIUM)
+9. **NO Automated Code Modification Scripts** (CRITICAL)
+10. **Single Source of Truth for MCP** (HIGH)
+11. **TodoWrite for Complex Tasks** (MEDIUM)
+12. **Read Source Documentation First** (HIGH)
 
-- `install --client` now supports Cursor, Windsurf, and Visual Studio Code with idempotent merges, atomic writes, and `.bak` rollbacks.
-- HTTP-aware installers preserve `serverUrl` entries for Windsurf and emit VS Code workspace snippets plus a `vscode:mcp/install` link when no config is provided.
-- Documentation now consolidates provider keys, transport selection, uninstall guidance, and dedicated client docs at [docs/clients.md](./docs/clients.md).
+### Project Rules (Your Custom)
 
-## Session Constitution (per-session rules)
+Add project-specific rules in `.vibe-check/constitutional-rules.json`:
 
-Use a lightweight “constitution” to enforce rules per `sessionId` that CPI will honor. Eg. constitution rules: “no external network calls,” “prefer unit tests before refactors,” “never write secrets to disk.”
+```json
+{
+  "extends": ["shared/base-constitutional-rules.json"],
+  "rules": {
+    "api-versioning": {
+      "id": "api-versioning",
+      "name": "REST API Versioning",
+      "description": "ALWAYS version API endpoints as /api/v1/...",
+      "category": "architecture",
+      "severity": "CRITICAL",
+      "enabled": true
+    }
+  }
+}
+```
 
-**API (tools):**
-- `update_constitution({ sessionId, rules })` → merges/sets rule set for the session
-- `reset_constitution({ sessionId })` → clears session rules
-- `check_constitution({ sessionId })` → returns effective rules for the session
+**Inheritance Chain:**
+```
+Base Rules (12 universal)
+    ↓ extends
+Project Rules (your custom rules)
+    ↓ loaded into
+Session Constitution (runtime)
+```
 
-## Development Setup
+---
+
+## 🛠️ MCP Tools
+
+### `vibe_check` - Metacognitive Review
+
+Catch tunnel vision and prevent cascading errors:
+
+```typescript
+vibe_check({
+  goal: "Implement user authentication",
+  plan: "1. Add JWT middleware 2. Create login endpoint 3. Test",
+  uncertainties: ["Should we use OAuth or JWT?"],
+  sessionId: "auth-feature-001"
+})
+
+// Returns thoughtful critique:
+// "Have you considered password reset flow?
+//  What about rate limiting on login attempts?"
+```
+
+### `vibe_learn` - Pattern Capture
+
+Record mistakes and solutions for future prevention:
+
+```typescript
+vibe_learn({
+  type: "mistake",
+  mistake: "Forgot to add database indexes before deploying",
+  category: "Premature Implementation",
+  solution: "Always run performance validation before production"
+})
+```
+
+### `check_constitution` / `update_constitution`
+
+Manage session-specific rules dynamically (inherited from original vibe-check).
+
+---
+
+## 🧪 Validation & Testing
+
+### Pre-Flight Validation
+
+Catch configuration errors before runtime:
+
 ```bash
-# Clone and install
-git clone https://github.com/PV-Bhat/vibe-check-mcp-server.git
-cd vibe-check-mcp-server
-npm ci
+cd .vibe-check/enhanced-mcp-server
+npm run validate
+
+# Output:
+# ✅ Rules File: constitutional-rules.json
+# ✅ Inheritance Chain: base → project (14 rules)
+# ✅ Severity: 3 CRITICAL, 6 HIGH, 5 MEDIUM
+# ✅ Validation PASSED
+```
+
+### Hot Reload (Development)
+
+Enable file watching for live rule updates:
+
+```json
+"VIBE_CHECK_HOT_RELOAD": "true"
+```
+
+**Note:** Use new `sessionId` after hot reload to get updated rules.
+
+---
+
+## 🔧 Development
+
+### Build from Source
+
+```bash
+cd .vibe-check/enhanced-mcp-server
+npm install
 npm run build
-npm test
+npm run validate
 ```
-Use **npm** for all workflows (`npm ci`, `npm run build`, `npm test`). This project targets Node **>=20**.
 
-Create a `.env` file with the API keys you plan to use:
+### Environment Variables
+
+Set in `.mcp.json`:
+
+- `GEMINI_API_KEY` - Your Gemini API key (required)
+- `VIBE_CHECK_STORAGE_DIR` - Absolute path to `.vibe-check/` directory
+- `VIBE_CHECK_RULES_FILE` - Absolute path to `constitutional-rules.json`
+- `VIBE_CHECK_HOT_RELOAD` - Enable file watching (`true` / `false`)
+- `DEFAULT_LLM_PROVIDER` - LLM provider (`gemini`, `openai`, `anthropic`)
+- `DEFAULT_MODEL` - Model name (e.g., `gemini-2.5-flash`)
+
+---
+
+## 🚧 Troubleshooting
+
+### Issue: "Rule set file not found"
+
+**Cause:** Incorrect `extends` path in constitutional-rules.json
+
+**Fix:**
+```json
+// ✅ Correct (relative to rules file):
+"extends": ["shared/base-constitutional-rules.json"]
+
+// ❌ Wrong:
+"extends": [".vibe-check/shared/base-constitutional-rules.json"]
+```
+
+### Issue: "Validation failed"
+
+**Cause:** JSON syntax error or missing required fields
+
+**Fix:**
 ```bash
-# Gemini (default)
-GEMINI_API_KEY=your_gemini_api_key
-# Optional providers / Anthropic-compatible endpoints
-OPENAI_API_KEY=your_openai_api_key
-OPENROUTER_API_KEY=your_openrouter_api_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
-ANTHROPIC_AUTH_TOKEN=your_proxy_bearer_token
-ANTHROPIC_BASE_URL=https://api.anthropic.com
-ANTHROPIC_VERSION=2023-06-01
-# Optional overrides
-# DEFAULT_LLM_PROVIDER accepts gemini | openai | openrouter | anthropic
-DEFAULT_LLM_PROVIDER=gemini
-DEFAULT_MODEL=gemini-2.5-pro
+npm run validate  # See detailed error with line/column
 ```
 
-#### Configuration 
+### Issue: Rules not loading in Claude Code
 
-See [docs/TESTING.md]() for instructions on how to run tests.
+**Cause:** Stale MCP server
 
-### Docker
-The repository includes a helper script for one-command setup.
-```bash
-bash scripts/docker-setup.sh
-```
-See [Automatic Docker Setup](./docs/docker-automation.md) for full details.
+**Fix:**
+1. Check `.mcp.json` has correct **absolute paths**
+2. Restart Claude Code
+3. Run `npm run validate` to verify rules
 
-### Provider keys
+---
 
-See [API Keys & Secret Management](./docs/api-keys.md) for supported providers, resolution order, storage locations, and security guidance.
+## 🙏 Acknowledgments
 
-### Transport selection
+- **Original Vibe-Check MCP:** [pv-bhat/vibe-check-mcp-server](https://github.com/PV-Bhat/vibe-check-mcp-server) by [Pruthvi Bhat](https://pruthvibhat.com/)
+- **Constitutional AI:** Anthropic's constitutional AI research
+- **Model Context Protocol:** Anthropic's MCP specification
+- **CPI Research:** [Chain-Pattern Interrupt (MURST)](https://doi.org/10.5281/zenodo.14851363)
 
-The CLI supports stdio and HTTP transports. Transport resolution follows this order: explicit flags (`--stdio`/`--http`) → `MCP_TRANSPORT` → default `stdio`. When using HTTP, specify `--port` (or set `MCP_HTTP_PORT`); the default port is **2091**. The generated entries add `--stdio` or `--http --port <n>` accordingly, and HTTP-capable clients also receive a `http://127.0.0.1:<port>` endpoint.
+---
 
-### Client installers
+## 📄 License
 
-Each installer is idempotent and tags entries with `"managedBy": "vibe-check-mcp-cli"`. Backups are written once per run before changes are applied, and merges are atomic (`*.bak` files make rollback easy). See [docs/clients.md](./docs/clients.md) for deeper client-specific references.
+MIT License - see [LICENSE](LICENSE) file for details.
 
-#### Claude Desktop
+---
 
-- Config path: `claude_desktop_config.json` (auto-discovered per platform).
-- Default transport: stdio (`npx … start --stdio`).
-- Restart Claude Desktop after installation to load the new MCP server.
-- If an unmanaged entry already exists for `vibe-check-mcp`, the CLI leaves it untouched and prints a warning.
+## 🔗 Links
 
-#### Cursor
+- **Original vibe-check-mcp:** https://github.com/PV-Bhat/vibe-check-mcp-server
+- **MCP Specification:** https://anthropic.com/mcp
+- **CPI Research Paper:** http://dx.doi.org/10.13140/RG.2.2.18237.93922
 
-- Config path: `~/.cursor/mcp.json` (provide `--config` if you store it elsewhere).
-- Schema mirrors Claude’s `mcpServers` layout.
-- If the file is missing, the CLI prints a ready-to-paste JSON block for Cursor’s settings panel instead of failing.
+---
 
-#### Windsurf (Cascade)
+**Built with ❤️ for project-agnostic Constitutional AI workflows**
 
-- Config path: legacy `~/.codeium/windsurf/mcp_config.json`, new builds use `~/.codeium/mcp_config.json`.
-- Pass `--http` to emit an entry with `serverUrl` for Windsurf’s HTTP client.
-- Existing sentinel-managed `serverUrl` entries are preserved and updated in place.
-
-#### Visual Studio Code
-
-- Workspace config lives at `.vscode/mcp.json`; profiles also store `mcp.json` in your VS Code user data directory.
-- Provide `--config <path>` to target a workspace file. Without `--config`, the CLI prints a JSON snippet and a `vscode:mcp/install?...` link you can open directly from the terminal.
-- VS Code supports optional dev fields; pass `--dev-watch` and/or `--dev-debug <value>` to populate `dev.watch`/`dev.debug`.
-
-### Uninstall & rollback
-
-- Restore the backup generated during installation (the newest `*.bak` next to your config) to revert immediately.
-- To remove the server manually, delete the `vibe-check-mcp` entry under `mcpServers` (Claude/Windsurf/Cursor) or `servers` (VS Code) as long as it is still tagged with `"managedBy": "vibe-check-mcp-cli"`.
-
-## Research & Philosophy
-
-**CPI (Chain-Pattern Interrupt)** is the research-backed oversight method behind Vibe Check. It injects brief, well-timed “pause points” at risk inflection moments to re-align the agent to the user’s true priority, preventing destructive cascades and **reasoning lock-in (RLI)**. In pooled evaluation across 153 runs, CPI **nearly doubles success (~27%→54%) and roughly halves harmful actions (~83%→42%)**. Optimal interrupt **dosage is ~10–20%** of steps. *Vibe Check MCP implements CPI as an external mentor layer at test time.*
-
-**Links:**  
-- 📄 **CPI Paper (ResearchGate)** — http://dx.doi.org/10.13140/RG.2.2.18237.93922  
-- 📘 **CPI Reference Implementation (GitHub)**: https://github.com/PV-Bhat/cpi
-- 📚 **MURST Zenodo DOI (RSRC archival)**: https://doi.org/10.5281/zenodo.14851363
-
-```mermaid
-flowchart TD
-  A[Agent Phase] --> B{Monitor Progress}
-  B -- high risk --> C[CPI Interrupt]
-  C --> D[Reflect & Adjust]
-  B -- smooth --> E[Continue]
-```
-
-## Agent Prompting Essentials
-In your agent's system prompt, make it clear that `vibe_check` is a mandatory tool for reflection. Always pass the full user request and other relevant context. After correcting a mistake, you can optionally log it with `vibe_learn` to build a history for future analysis.
-
-Example snippet:
-```
-As an autonomous agent you will:
-1. Call vibe_check after planning and before major actions.
-2. Provide the full user request and your current plan.
-3. Optionally, record resolved issues with vibe_learn.
-```
-
-## When to Use Each Tool
-| Tool                   | Purpose                                                      |
-|------------------------|--------------------------------------------------------------|
-| 🛑 **vibe_check**       | Challenge assumptions and prevent tunnel vision              |
-| 🔄 **vibe_learn**       | Capture mistakes, preferences, and successes                 |
-| 🧰 **update_constitution** | Set/merge session rules the CPI layer will enforce         |
-| 🧹 **reset_constitution**  | Clear rules for a session                                  |
-| 🔎 **check_constitution**  | Inspect effective rules for a session                      |
-
-## Documentation
-- [Agent Prompting Strategies](./docs/agent-prompting.md)
-- [CPI Integration](./docs/integrations/cpi.md)
-- [Advanced Integration](./docs/advanced-integration.md)
-- [Technical Reference](./docs/technical-reference.md)
-- [Automatic Docker Setup](./docs/docker-automation.md)
-- [Philosophy](./docs/philosophy.md)
-- [Case Studies](./docs/case-studies.md)
-- [Changelog](./docs/changelog.md)
-
-## Security
-This repository includes a CI-based security scan that runs on every pull request. It checks dependencies with `npm audit` and scans the source for risky patterns. See [SECURITY.md](./SECURITY.md) for details and how to report issues.
-
-## Roadmap (New PRs welcome)
-
-### Priority 1 – Builder Experience & Guidance
-- **Structured output for `vibe_check`:** Return a JSON envelope such as `{ advice, riskScore, traits }` so downstream agents can reason deterministically while preserving readable reflections.
-- **Agent prompt starter kit:** Publish a plug-and-play system prompt snippet that teaches the CPI dosage principle (10–20% of steps), calls out risk inflection points, and reminds agents to include the last 5–10 tool calls in `taskContext`.
-- **Documentation refresh:** Highlight the new prompt template and context requirements throughout the README and integration guides.
-
-### Priority 2 – Core Reliability Requests
-- **LLM resilience:** Wrap `generateResponse` in `src/utils/llm.ts` with retries and exponential backoff, with a follow-up circuit breaker once the basics land.
-- **Input sanitization:** Validate and cleanse tool arguments in `src/index.ts` to mitigate prompt-injection vectors.
-- **State stewardship:** Add TTL-based cleanup in `src/utils/state.ts` and switch `src/utils/storage.ts` file writes to `fs.promises` to avoid blocking the event loop.
-
-These initiatives are tracked as community-facing GitHub issues so contributors can grab them and see progress in the open.
-
-### Additional Follow-On Ideas & Good First Issues
-- **Telemetry sanity checks:** Add a lint-style CI step that verifies `docs/` examples compile (e.g., TypeScript snippet type-check) to catch drift between docs and code.
-- **CLI help polish:** Ensure every CLI subcommand prints a concise `--help` example aligned with the refreshed prompt guidance.
-- **Docs navigation cleanup:** Cross-link `docs/agent-prompting.md` and `docs/technical-reference.md` from the README section headers to reduce context switching for new contributors.
-
-## Contributors & Community
-Contributions are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-<a href="https://github.com/PV-Bhat/vibe-check-mcp-server/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=PV-Bhat/vibe-check-mcp-server" alt="Contributors"/>
-</a> 
-
-## Links
-* [MSEEP](https://mseep.ai/app/pv-bhat-vibe-check-mcp-server)
-* [MCP Servers](https://mcpservers.org/servers/PV-Bhat/vibe-check-mcp-server)
-* [MCP.so](https://mcp.so/server/vibe-check-mcp-server/PV-Bhat)
-* [Creati.ai](https://creati.ai/mcp/vibe-check-mcp-server/)
-* [Pulse MCP](https://www.pulsemcp.com/servers/pv-bhat-vibe-check)
-* [Playbooks.com](https://playbooks.com/mcp/pv-bhat-vibe-check)
-* [MCPHub.tools](https://mcphub.tools/detail/PV-Bhat/vibe-check-mcp-server)
-* [MCP Directory](https://mcpdirectory.ai/mcpserver/2419/)
-
-## Credits & License
-Vibe Check MCP is released under the [MIT License](LICENSE). Built for reliable, enterprise-ready AI agents.
-
-## Author Credits & Links
-Vibe Check MCP created by: [Pruthvi Bhat](https://pruthvibhat.com/), Initiative - https://murst.org/
+**Enhanced for local deployment and file-based rule management**
