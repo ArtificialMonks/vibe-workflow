@@ -1,0 +1,53 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+# Metadata for discoverability and registry listing
+name: vibe-check-mcp
+version: 2.5.0
+description: Metacognitive AI agent oversight tool implementing CPI-driven interrupts for alignment and safety.
+author: PV-Bhat
+repository: https://github.com/PV-Bhat/vibe-check-mcp-server
+license: MIT
+category: ai-tools
+tags:
+  - cpi chain pattern interrupts
+  - pruthvi bhat
+  - rli reasoning lock in
+  - murst
+  - metacognition
+  - workflow-optimization
+  - gemini
+  - openai
+  - openrouter
+capabilities:
+  - meta-mentorship
+  - agentic oversight
+  - chain pattern-interrupt
+  - vibe-check
+  - self-improving-feedback
+  - multi-provider-llm
+
+# Requirements (e.g., for local setup)
+requirements:
+  node: ">=18.0.0"
+
+# Installation options
+installation:
+  npm: "@mseep/vibe-check-mcp"  # For manual npm install
+
+startCommand:
+  type: http
+  command: node build/index.js
+  env:
+    MCP_HTTP_PORT: "3000"
+    MCP_DISCOVERY_MODE: "1"
+
+http:
+  endpoint: "/mcp"
+  cors:
+    origin: "${CORS_ORIGIN:-*}"
+
+# Documentation links
+documentation:
+  getting_started: https://github.com/PV-Bhat/vibe-check-mcp-server#installation
+  configuration: https://github.com/PV-Bhat/vibe-check-mcp-server#configuration
+  technical_reference: https://github.com/PV-Bhat/vibe-check-mcp-server/blob/main/docs/technical-reference.md
