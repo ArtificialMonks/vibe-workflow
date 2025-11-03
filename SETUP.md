@@ -165,6 +165,88 @@ Restart Claude Code to load the new MCP server.
 
 ---
 
+## 🎯 Work-Type Specific Constitutional Templates (Advanced)
+
+### What Are Constitutional Templates?
+
+Constitutional templates are **work-type specific rule sets** that auto-load based on what you're working on:
+
+```
+📦 Project Structure
+├── .vibe-check/
+│   ├── constitutions/                    # Work-type rules
+│   │   ├── database-migrations.json      # For database work
+│   │   ├── api-development.json          # For API work
+│   │   ├── ui-components.json            # For UI work
+│   │   ├── workflow-automation.json       # For automation
+│   │   ├── integration-development.json   # For integrations
+│   │   ├── testing.json                   # For testing
+│   │   └── deployment.json                # For deployments
+│   └── enhanced-mcp-server/               # MCP server
+```
+
+### How It Works
+
+When you work with Linear issues labeled with keywords (e.g., `database`, `migration`), the system:
+
+1. Detects your work type from issue labels
+2. Loads the appropriate constitutional template (e.g., `database-migrations.json`)
+3. Passes rules to `reset_constitution()` MCP tool
+4. `vibe_check` now references work-type specific guidance
+
+**Example:** Working on a database migration:
+```
+Linear Issue: "Add email uniqueness constraint"
+Labels: ["database", "migration"]
+     ↓
+Auto-loads: database-migrations.json (11 rules)
+     ↓
+vibe_check asks about: IF NOT EXISTS, RLS policies, indexes, triggers
+```
+
+### Load Work-Type Rules Manually
+
+```bash
+cd .vibe-check/enhanced-mcp-server
+npx tsx scripts/load-work-type-constitution.ts database-migrations /path/to/project
+
+# Output:
+# 📋 Constitutional Rules for Work Type: database-migrations
+#    Total Rules: 12 (11 base + 1 work-type specific)
+#    🔴 CRITICAL: 3
+#    🟠 HIGH: 6
+#    🟡 MEDIUM: 3
+#
+# ⚡ Work-Type Specific Rules:
+#    🔴 Always include `IF NOT EXISTS` clauses
+#    🔴 Enable Row Level Security (RLS) for multi-tenant tables
+```
+
+### Available Work Types
+
+| Work Type | File | Triggered By | Purpose |
+|-----------|------|--------------|---------|
+| `database-migrations` | database-migrations.json | `database`, `migration`, `schema` | PostgreSQL schema changes |
+| `api-development` | api-development.json | `api`, `backend`, `endpoint` | NestJS API development |
+| `ui-components` | ui-components.json | `ui`, `frontend`, `react`, `component` | React/Tailwind components |
+| `workflow-automation` | workflow-automation.json | `workflow`, `automation`, `playwright` | Browser automation |
+| `integration-development` | integration-development.json | `integration`, `webhook`, `oauth` | Third-party integrations |
+| `testing` | testing.json | `test`, `qa`, `e2e` | Testing & QA |
+| `deployment` | deployment.json | `deployment`, `ci`, `production` | Deployments & DevOps |
+
+### Auto-Detection Priority
+
+Templates are loaded in priority order (most specific first):
+1. Deployment (affects everything)
+2. Testing (quality gates)
+3. Integration (third-party)
+4. Database (schema)
+5. Workflow (automation)
+6. UI (frontend)
+7. API (default)
+
+---
+
 ## 🧠 Intelligent Rule Generation
 
 ### How It Works
@@ -284,6 +366,21 @@ Enable file watching for live rule updates:
 ```
 
 **Note:** Use a new `sessionId` after hot reload to get updated rules.
+
+### Integration with /vibe-linear Workflow
+
+If you're using `/vibe-linear` workflow with Linear issues:
+
+```bash
+# /vibe-linear workflow automatically:
+# 1. Reads Linear issue labels
+# 2. Detects work type (e.g., "database-migrations")
+# 3. Loads constitutional template
+# 4. Calls reset_constitution() with work-type rules
+# 5. vibe_check references these rules
+```
+
+**No additional setup needed** - if you have `.vibe-check/constitutions/` directory, the workflow will use it.
 
 ---
 
