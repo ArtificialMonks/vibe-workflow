@@ -1,0 +1,30 @@
+{
+  "name": "UI Components",
+  "description": "Constitutional rules for frontend UI component development",
+  "workTypes": ["ui", "frontend", "component", "react", "vue", "angular", "design"],
+  "rules": [
+    "CRITICAL: Implement responsive design for mobile, tablet, and desktop",
+    "CRITICAL: Add accessibility features (ARIA labels, keyboard navigation, screen reader support)",
+    "HIGH: Follow project design system and style guide consistently",
+    "HIGH: Use semantic HTML elements (header, nav, main, footer, article)",
+    "HIGH: Implement error states and loading states for all components",
+    "HIGH: Extract reusable components instead of duplicating code",
+    "MEDIUM: Optimize images and assets for performance",
+    "MEDIUM: Add proper alt text for all images",
+    "MEDIUM: Test components across different browsers",
+    "MEDIUM: Use CSS preprocessors or utility frameworks (Tailwind, SCSS) consistently"
+  ],
+  "antiPatterns": [
+    "Hardcoded colors and spacing (use design tokens)",
+    "Non-responsive designs that break on mobile",
+    "Missing accessibility features (keyboard navigation, ARIA)",
+    "Deeply nested component hierarchies",
+    "No loading or error states",
+    "Mixing styling approaches (inline styles + CSS + utility classes)"
+  ],
+  "guidelines": {
+    "componentStructure": "Keep components small and focused on single responsibility",
+    "styling": "Follow project conventions (CSS Modules, Styled Components, Tailwind)",
+    "accessibility": "Test with screen readers and keyboard-only navigation"
+  }
+}

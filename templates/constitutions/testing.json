@@ -1,0 +1,31 @@
+{
+  "name": "Testing & QA",
+  "description": "Constitutional rules for testing and quality assurance",
+  "workTypes": ["test", "testing", "qa", "quality", "e2e"],
+  "rules": [
+    "CRITICAL: Write tests BEFORE implementing features (TDD approach)",
+    "CRITICAL: Achieve minimum 80% code coverage for new features",
+    "CRITICAL: Test both success paths and error/edge cases",
+    "HIGH: Clean up test data after each test (avoid test pollution)",
+    "HIGH: Use descriptive test names that explain what is being tested",
+    "HIGH: Mock external dependencies (APIs, databases) for unit tests",
+    "HIGH: Run full test suite before committing code",
+    "MEDIUM: Test cross-browser compatibility for frontend features",
+    "MEDIUM: Add integration tests for critical user workflows",
+    "MEDIUM: Use test doubles appropriately (mocks, stubs, spies)",
+    "MEDIUM: Keep tests fast and independent"
+  ],
+  "antiPatterns": [
+    "Skipping tests for 'simple' code",
+    "Tests that depend on execution order",
+    "Flaky tests with arbitrary waits/sleeps",
+    "Testing implementation details instead of behavior",
+    "Missing test cleanup (database pollution)",
+    "No coverage for error paths"
+  ],
+  "guidelines": {
+    "testStructure": "Follow Arrange-Act-Assert (AAA) pattern",
+    "coverage": "Focus on critical paths and edge cases, not just line coverage",
+    "maintenance": "Refactor tests when refactoring code"
+  }
+}

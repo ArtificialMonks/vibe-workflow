@@ -1,0 +1,28 @@
+{
+  "name": "Database Migrations",
+  "description": "Constitutional rules for database schema changes and migrations",
+  "workTypes": ["database", "migration", "schema"],
+  "rules": [
+    "CRITICAL: Always include IF NOT EXISTS or IF EXISTS clauses to make migrations idempotent",
+    "CRITICAL: Test migrations on a copy of production data before deploying",
+    "CRITICAL: Create database backup before running migrations in production",
+    "HIGH: Use sequential migration numbering (001, 002, 003...) for ordering",
+    "HIGH: Add database indexes for all foreign key columns",
+    "HIGH: Include rollback/down migrations for every change",
+    "MEDIUM: Add created_at and updated_at timestamp columns to new tables",
+    "MEDIUM: Document breaking changes in migration comments",
+    "MEDIUM: Verify migration performance on large datasets"
+  ],
+  "antiPatterns": [
+    "Running migrations directly in production without testing",
+    "Duplicate migration numbers or conflicting names",
+    "Missing indexes on frequently queried columns",
+    "No rollback strategy for failed migrations",
+    "Modifying already-executed migrations"
+  ],
+  "guidelines": {
+    "naming": "Use descriptive names: YYYYMMDDHHMMSS_add_user_email_index.sql",
+    "testing": "Always test migrations on staging environment first",
+    "performance": "Consider migration impact on live traffic during execution"
+  }
+}

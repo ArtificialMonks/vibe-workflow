@@ -1,0 +1,32 @@
+{
+  "name": "API Development",
+  "description": "Constitutional rules for REST API and backend development",
+  "workTypes": ["api", "backend", "endpoint", "rest"],
+  "rules": [
+    "CRITICAL: Validate all input parameters and sanitize user data",
+    "CRITICAL: Implement proper authentication and authorization checks",
+    "CRITICAL: Never expose sensitive data (passwords, tokens, API keys) in responses",
+    "CRITICAL: Use environment variables for configuration (never hardcode secrets)",
+    "HIGH: Version API endpoints (e.g., /api/v1/users)",
+    "HIGH: Implement rate limiting to prevent abuse",
+    "HIGH: Add proper error handling with meaningful error messages",
+    "HIGH: Log errors and important events for debugging",
+    "MEDIUM: Document API endpoints with examples (OpenAPI/Swagger)",
+    "MEDIUM: Use HTTP status codes correctly (200, 201, 400, 401, 404, 500)",
+    "MEDIUM: Implement pagination for list endpoints",
+    "MEDIUM: Add request/response validation schemas"
+  ],
+  "antiPatterns": [
+    "Missing input validation (SQL injection, XSS vulnerabilities)",
+    "Hardcoded credentials or API keys in source code",
+    "Returning stack traces in production error responses",
+    "No authentication on sensitive endpoints",
+    "Breaking API changes without versioning",
+    "Missing rate limiting (DoS vulnerability)"
+  ],
+  "guidelines": {
+    "authentication": "Use JWT, OAuth 2.0, or API keys consistently",
+    "errorHandling": "Return structured error responses with error codes",
+    "documentation": "Keep API documentation up-to-date with code changes"
+  }
+}
