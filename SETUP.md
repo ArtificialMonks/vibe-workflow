@@ -91,57 +91,127 @@ your-project/
 └── .mcp.json                              # MCP configuration
 ```
 
-### Step 3: Generate Intelligent Rules from Project Documentation
+### Step 3: Generate Intelligent Constitutional Templates (🔥 NEW!)
 
-This is the **secret sauce** that makes your constitutional rules project-specific!
+This is the **secret sauce** that makes your system truly intelligent!
+
+#### **Option A: Intelligent Template Generator (Recommended)**
+
+Analyzes your ENTIRE codebase to discover work types and customize templates:
+
+```bash
+cd /path/to/your/project/.vibe-check/enhanced-mcp-server
+npx tsx scripts/intelligent-constitution-generator.ts /path/to/your/project
+```
+
+**What this does:**
+
+🔬 **Analyzes Codebase**
+- Scans `package.json` for frameworks (NestJS, React, Playwright, etc.)
+- Detects specialized domains (ML, blockchain, payments, auth, real-time)
+- Identifies project structure (monorepo, Docker, CI/CD)
+
+🔎 **Discovers New Work Types**
+- Auto-detects if you need specialized templates
+- Examples: `monorepo-coordination.json`, `ml-development.json`, `payment-processing.json`
+- Generates templates for discovered domains
+
+📖 **Scans CLAUDE.md by Section**
+- Extracts rules categorized by work type
+- Maps sections to templates (Database → database-migrations.json)
+- Preserves severity levels (CRITICAL, HIGH, MEDIUM)
+
+✏️ **Customizes Existing Templates**
+- Merges generic best practices with YOUR project rules
+- Keeps standard rules + adds project-specific rules
+- Updates descriptions with project name
+
+🆕 **Generates New Templates**
+- Creates templates for discovered specialized domains
+- Includes evidence and confidence levels
+- Auto-generates rules based on detected frameworks
+
+**Example output:**
+
+```
+🔍 Intelligent Constitutional Template Generator
+
+📂 Project: my-nestjs-app
+📍 Location: /path/to/my-nestjs-app
+
+🔬 Step 1: Analyzing codebase...
+   Frameworks: NestJS, React, Playwright, Prisma
+   Languages: TypeScript, JavaScript
+   Monorepo: No
+   Docker: Yes
+   CI/CD: Yes
+   Specialized: authentication, realtime, payments
+
+🔎 Step 2: Discovering work types...
+   Discovered 4 new work types:
+
+   ✨ Container Orchestration (high confidence)
+      Evidence: Found Dockerfile or docker-compose.yml
+   ✨ Authentication & Security (high confidence)
+      Evidence: Detected auth libraries
+   ✨ Real-time Communication (high confidence)
+      Evidence: Detected real-time libraries
+   ✨ Payment Processing (high confidence)
+      Evidence: Detected payment libraries
+
+📖 Step 3: Extracting rules from CLAUDE.md...
+   Extracted 47 rules
+
+   database-migrations: 8 rules
+   api-development: 12 rules
+   ui-components: 7 rules
+   testing: 6 rules
+   deployment: 9 rules
+   auth-security: 5 rules
+
+✏️  Step 5: Customizing existing templates...
+   ✓ database-migrations: +8 project-specific rules
+   ✓ api-development: +12 project-specific rules
+   ✓ ui-components: +7 project-specific rules
+   ✓ testing: +6 project-specific rules
+   ✓ deployment: +9 project-specific rules
+
+🆕 Step 6: Generating new templates for discovered work types...
+   ✓ Generated container-orchestration.json
+   ✓ Generated auth-security.json
+   ✓ Generated realtime-communication.json
+   ✓ Generated payment-processing.json
+
+💾 Step 7: Saving templates...
+   ✓ Saved 11 templates
+
+📊 Summary:
+   Total templates: 11 (7 standard + 4 discovered)
+   Customized: 7 existing templates
+   New: 4 specialized templates
+   Total rules: 142
+
+✨ Intelligent generation complete!
+
+🎯 Next steps:
+   1. Review customized templates in .vibe-check/constitutions/
+   2. Adjust rules as needed for your project
+   3. Run: npm run validate
+   4. Restart Claude Code
+```
+
+#### **Option B: Simple Rule Generator** (Project-wide only)
+
+Generates only the main `constitutional-rules.json` (simpler, but less powerful):
 
 ```bash
 cd /path/to/your/project/.vibe-check/enhanced-mcp-server
 npx tsx scripts/generate-rules-from-docs.ts /path/to/your/project
 ```
 
-**What this scans:**
+This is the original generator - it only creates `constitutional-rules.json` and doesn't customize work-type templates.
 
-📄 **CLAUDE.md** - Extracts zero-tolerance rules, conventions, and patterns
-📄 **README.md** - Understands project purpose and conventions
-📄 **package.json** - Detects frameworks and dependencies
-
-**Example output:**
-
-```
-🔍 Scanning project documentation...
-
-📊 Project Analysis:
-   Name: hivebrowser
-   CLAUDE.md: ✅ Found
-   README.md: ✅ Found
-   Frameworks: NestJS, React, TypeORM
-   Patterns: 8 zero-tolerance rules found
-   Conventions: 12 conventions found
-
-✅ Generated constitutional rules at:
-   /path/to/hivebrowser/.vibe-check/constitutional-rules.json
-
-📝 Generated 4 project-specific rules:
-
-   • hivebrowser Project Patterns (HIGH)
-     ALWAYS follow hivebrowser-specific patterns and conventions as defined in CLAUDE.md
-
-   • hivebrowser Framework Conventions (CRITICAL)
-     ALWAYS use approved frameworks: NestJS, React
-
-   • hivebrowser Forbidden Patterns (CRITICAL)
-     NEVER use TypeORM, NEVER delete package-lock.json
-
-   • Read CLAUDE.md Before Work (HIGH)
-     ALWAYS read CLAUDE.md and relevant context files before starting any task
-
-🎯 Next steps:
-   1. Review generated rules in .vibe-check/constitutional-rules.json
-   2. Customize rules as needed
-   3. Run: npm run validate
-   4. Restart Claude Code
-```
+**Recommendation:** Use Option A (intelligent generator) for full power!
 
 ### Step 4: Add Your API Key
 

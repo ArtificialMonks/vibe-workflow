@@ -59,9 +59,12 @@ cd vibe-workflow
 # 2. Run initialization script (sets up everything automatically)
 ./init.sh /path/to/your/project
 
-# 3. Generate intelligent rules from your project's CLAUDE.md
+# 3. Generate intelligent constitutional templates (🔥 NEW!)
 cd /path/to/your/project/.vibe-check/enhanced-mcp-server
-npx tsx scripts/generate-rules-from-docs.ts /path/to/your/project
+npx tsx scripts/intelligent-constitution-generator.ts /path/to/your/project
+
+# This analyzes your codebase, discovers work types, customizes templates,
+# and generates new templates for specialized domains (ML, blockchain, etc.)
 
 # 4. Add your Gemini API key to .mcp.json
 # 5. Restart Claude Code
@@ -76,12 +79,13 @@ npx tsx scripts/generate-rules-from-docs.ts /path/to/your/project
 - ✅ Creates `.mcp.json` configuration
 - ✅ Runs validation
 
-**What intelligent rule generation does:**
-- 🧠 Scans your `CLAUDE.md` for zero-tolerance rules (`**NEVER**:`)
-- 🧠 Extracts conventions and patterns (`**ALWAYS**:`)
-- 🧠 Detects frameworks from `package.json`
-- 🧠 Auto-generates project-specific constitutional rules
-- 🧠 Creates rules tailored to YOUR project's needs
+**What intelligent generation does:**
+- 🧠 Analyzes ENTIRE codebase (package.json, CLAUDE.md, directory structure)
+- 🧠 Discovers work types YOU need (ML, blockchain, payments, auth, etc.)
+- 🧠 Customizes 7 standard templates with YOUR project rules
+- 🧠 Generates NEW templates for discovered specialized domains
+- 🧠 Extracts rules from CLAUDE.md by section/work-type
+- 🧠 Creates 100% project-aware constitutional system
 
 **See [SETUP.md](SETUP.md) for detailed installation guide.**
 
