@@ -92,11 +92,21 @@ npx tsx scripts/generate-rules-from-docs.ts /path/to/your/project
 ```
 your-project/
 ├── .vibe-check/
-│   ├── constitutional-rules.json          # Project-specific rules (auto-created)
+│   ├── constitutional-rules.json          # Project-wide rules (auto-generated)
 │   ├── shared/
 │   │   ├── base-constitutional-rules.json # 12 universal base rules
 │   │   └── schema/
 │   │       └── constitutional-rules.schema.json
+│   │
+│   ├── constitutions/                     # Work-type specific rules (optional)
+│   │   ├── database-migrations.json      # Database work rules
+│   │   ├── api-development.json          # API development rules
+│   │   ├── ui-components.json            # UI component rules
+│   │   ├── testing.json                  # Testing & QA rules
+│   │   ├── deployment.json               # Deployment rules
+│   │   ├── integration-development.json   # Integration rules
+│   │   ├── workflow-automation.json       # Automation rules
+│   │   └── README.md                     # Templates guide
 │   │
 │   ├── enhanced-mcp-server/               # This MCP server (built)
 │   │   ├── build/
