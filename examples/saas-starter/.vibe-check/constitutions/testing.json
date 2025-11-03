@@ -1,0 +1,49 @@
+{
+  "name": "Testing & QA",
+  "description": "Constitutional rules for testing and quality assurance (customized for saas-starter)",
+  "workTypes": [
+    "test",
+    "testing",
+    "qa",
+    "quality",
+    "e2e"
+  ],
+  "rules": [
+    "CRITICAL: Write tests BEFORE implementing features (TDD approach)",
+    "CRITICAL: Achieve minimum 80% code coverage for new features",
+    "CRITICAL: Test both success paths and error/edge cases",
+    "HIGH: Clean up test data after each test (avoid test pollution)",
+    "HIGH: Use descriptive test names that explain what is being tested",
+    "HIGH: Mock external dependencies (APIs, databases) for unit tests",
+    "HIGH: Run full test suite before committing code",
+    "MEDIUM: Test cross-browser compatibility for frontend features",
+    "MEDIUM: Add integration tests for critical user workflows",
+    "MEDIUM: Use test doubles appropriately (mocks, stubs, spies)",
+    "MEDIUM: Keep tests fast and independent",
+    "MEDIUM: Test with Stripe test keys before production",
+    "MEDIUM: Implement webhook signature verification tests",
+    "MEDIUM: Mock Stripe responses in unit tests",
+    "CRITICAL: Write unit tests for all business logic (80% coverage minimum)",
+    "CRITICAL: Write integration tests for API endpoints",
+    "CRITICAL: Test error paths and edge cases",
+    "HIGH: Use Vitest for unit tests (NOT Jest)",
+    "HIGH: Use Playwright for end-to-end tests",
+    "HIGH: Mock external dependencies (Stripe, emails, etc.)",
+    "MEDIUM: Organize tests by feature/domain",
+    "MEDIUM: Clean up test data after each test",
+    "MEDIUM: Use meaningful test descriptions"
+  ],
+  "antiPatterns": [
+    "Skipping tests for 'simple' code",
+    "Tests that depend on execution order",
+    "Flaky tests with arbitrary waits/sleeps",
+    "Testing implementation details instead of behavior",
+    "Missing test cleanup (database pollution)",
+    "No coverage for error paths"
+  ],
+  "guidelines": {
+    "testStructure": "Follow Arrange-Act-Assert (AAA) pattern",
+    "coverage": "Focus on critical paths and edge cases, not just line coverage",
+    "maintenance": "Refactor tests when refactoring code"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Integration Development",
+  "description": "Constitutional rules for third-party integrations, webhooks, and OAuth",
+  "workTypes": ["integration", "webhook", "oauth", "api-integration"],
+  "rules": [
+    "CRITICAL: Validate webhook signatures before processing requests",
+    "CRITICAL: Implement OAuth 2.0 flow with secure refresh token storage",
+    "CRITICAL: Use circuit breaker pattern for all external API calls",
+    "CRITICAL: Store API keys and secrets in encrypted environment variables",
+    "HIGH: Add rate limiting for webhook endpoints",
+    "HIGH: Implement retry logic with exponential backoff for failed API calls",
+    "HIGH: Add comprehensive logging for integration events",
+    "HIGH: Implement webhook replay mechanism for failed deliveries",
+    "MEDIUM: Add Prometheus metrics for integration health monitoring",
+    "MEDIUM: Implement idempotency checks for webhooks",
+    "MEDIUM: Set appropriate timeouts for external API calls",
+    "MEDIUM: Document integration configuration and setup steps"
+  ],
+  "antiPatterns": [
+    "Processing unsigned webhooks (security risk)",
+    "No rate limiting on webhook endpoints (DoS vulnerability)",
+    "Missing retry logic for transient failures",
+    "Storing API keys in plaintext or in source code",
+    "No circuit breaker for external calls (cascading failures)",
+    "Missing idempotency checks for webhooks"
+  ],
+  "guidelines": {
+    "security": "Always validate webhook signatures and encrypt credentials",
+    "reliability": "Use circuit breakers and retry logic for resilience",
+    "monitoring": "Track integration health and error rates"
+  }
+}

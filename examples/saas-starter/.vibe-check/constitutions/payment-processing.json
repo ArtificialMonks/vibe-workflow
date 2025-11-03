@@ -1,0 +1,21 @@
+{
+  "name": "Payment Processing",
+  "description": "Rules for payment integrations, PCI compliance, and financial transactions (auto-generated for saas-starter)",
+  "workTypes": [
+    "payment",
+    "stripe",
+    "billing",
+    "transaction"
+  ],
+  "rules": [
+    "HIGH: Add retry logic with exponential backoff for failed charges",
+    "HIGH: Log all payment events for audit trail",
+    "HIGH: Reconcile Stripe transactions daily with database"
+  ],
+  "antiPatterns": [],
+  "guidelines": {
+    "confidence": "high",
+    "evidence": "Detected payment libraries",
+    "generated": "Auto-generated based on codebase analysis"
+  }
+}

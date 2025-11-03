@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/ArtificialMonks/vibe-workflow/schema/constitutional-rules.schema.json",
+  "title": "Constitutional Rules Schema",
+  "description": "JSON Schema for vibe-workflow constitutional rules files",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema file"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the constitutional rules format",
+      "examples": ["1.0.0", "2.1.0"]
+    },
+    "extends": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of file paths to base rules to inherit from",
+      "examples": [["shared/base-constitutional-rules.json"]]
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of this rules file",
+      "examples": ["Constitutional rules for my-project"]
+    },
+    "rules": {
+      "type": "object",
+      "description": "Map of rule IDs to rule definitions",
+      "patternProperties": {
+        "^[a-z0-9-]+$": {
+          "$ref": "#/definitions/rule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "overrides": {
+      "type": "object",
+      "description": "Rules to override from inherited base rules",
+      "patternProperties": {
+        "^[a-z0-9-]+$": {
+          "$ref": "#/definitions/ruleOverride"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional metadata about this rules file",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Author or team responsible for these rules"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "Last update date in YYYY-MM-DD format"
+        },
+        "applicability": {
+          "type": "string",
+          "description": "Description of when/where these rules apply"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Tags for categorizing rule sets"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "required": ["version", "rules"],
+  "additionalProperties": false,
+  "definitions": {
+    "rule": {
+      "type": "object",
+      "description": "A single constitutional rule definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Unique identifier for this rule (kebab-case)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable name of the rule"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of what this rule requires"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "testing",
+            "dependencies",
+            "database",
+            "code-quality",
+            "error-handling",
+            "security",
+            "documentation",
+            "process",
+            "performance",
+            "accessibility",
+            "deployment",
+            "best-practices",
+            "architecture",
+            "api-design",
+            "ui-ux"
+          ],
+          "description": "Category this rule belongs to"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+          "description": "Severity level of this rule"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this rule is currently active",
+          "default": true
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explanation of why this rule exists"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Code examples showing correct implementation"
+        },
+        "antiPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Patterns to avoid (what NOT to do)"
+        },
+        "documentation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to detailed documentation"
+        },
+        "automatable": {
+          "type": "boolean",
+          "description": "Whether this rule can be automatically validated",
+          "default": false
+        },
+        "validationScript": {
+          "type": "string",
+          "description": "Path to script that validates this rule"
+        }
+      },
+      "required": ["id", "name", "description", "category", "severity", "enabled"],
+      "additionalProperties": false
+    },
+    "ruleOverride": {
+      "type": "object",
+      "description": "Override settings for an inherited rule",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Override the enabled status"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"],
+          "description": "Override the severity level"
+        },
+        "description": {
+          "type": "string",
+          "description": "Override or extend the description"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Override or extend the rationale"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional examples (merged with base)"
+        },
+        "antiPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional anti-patterns (merged with base)"
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    }
+  }
+}

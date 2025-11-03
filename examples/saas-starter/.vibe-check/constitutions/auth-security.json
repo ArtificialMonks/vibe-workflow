@@ -1,0 +1,38 @@
+{
+  "name": "Authentication & Security",
+  "description": "Rules for authentication, authorization, and security best practices (auto-generated for saas-starter)",
+  "workTypes": [
+    "auth",
+    "security",
+    "oauth",
+    "jwt"
+  ],
+  "rules": [
+    "HIGH: Add rate limiting on login endpoints (prevent brute force attacks)",
+    "HIGH: Audit all authentication events (login, logout, MFA, token refresh)",
+    "HIGH: Implement automatic reconnection with exponential backoff (WebSocket)",
+    "HIGH: Add heartbeat/ping-pong to detect stale WebSocket connections",
+    "MEDIUM: Implement session timeout after 30 minutes of inactivity",
+    "MEDIUM: Log WebSocket connection/disconnection events",
+    "MEDIUM: Store refresh tokens in secure HTTP-only cookies",
+    "CRITICAL: Validate Stripe webhook signatures before processing",
+    "CRITICAL: Use PCI-compliant token-based payments (never store card data)",
+    "CRITICAL: Implement idempotency keys for payment operations",
+    "CRITICAL: Encrypt all sensitive payment data at rest",
+    "CRITICAL: Authenticate WebSocket connections on initial handshake",
+    "CRITICAL: Validate all incoming socket messages against schemas",
+    "CRITICAL: Implement automatic reconnection with exponential backoff",
+    "HIGH: Add heartbeat/ping-pong to detect stale connections",
+    "HIGH: Implement message acknowledgment and retry logic",
+    "HIGH: Handle graceful disconnection and cleanup",
+    "MEDIUM: Log WebSocket connection/disconnection events",
+    "MEDIUM: Monitor WebSocket message latency",
+    "MEDIUM: Alert on high connection drop rates"
+  ],
+  "antiPatterns": [],
+  "guidelines": {
+    "confidence": "high",
+    "evidence": "Detected auth libraries",
+    "generated": "Auto-generated based on codebase analysis"
+  }
+}

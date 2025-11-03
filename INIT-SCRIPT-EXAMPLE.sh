@@ -115,20 +115,6 @@ cat > "$TARGET_DIR/.vibe-check/constitutional-rules.json" << EOF
 }
 EOF
 echo -e "${GREEN}✓ Constitutional rules configured for ${PROJECT_NAME}${NC}"
-
-# Copy constitutional templates (optional work-type specific rules)
-echo -e "${BLUE}[4b/7] Copying constitutional templates (optional)...${NC}"
-mkdir -p "$TARGET_DIR/.vibe-check/constitutions"
-
-if [ -d "template/constitutions" ]; then
-  cp -r template/constitutions/* "$TARGET_DIR/.vibe-check/constitutions/"
-  echo -e "${GREEN}✓ Constitutional templates copied (7 work-type templates)${NC}"
-elif [ -d "enhanced-mcp-server/template/constitutions" ]; then
-  cp -r enhanced-mcp-server/template/constitutions/* "$TARGET_DIR/.vibe-check/constitutions/"
-  echo -e "${GREEN}✓ Constitutional templates copied (7 work-type templates)${NC}"
-else
-  echo -e "${YELLOW}⚠ No constitutional templates found (optional feature)${NC}"
-fi
 echo ""
 
 # Step 5: Install dependencies
@@ -229,7 +215,6 @@ echo ""
 echo -e "${BLUE}Files created:${NC}"
 echo -e "  ✓ .vibe-check/constitutional-rules.json"
 echo -e "  ✓ .vibe-check/shared/base-constitutional-rules.json (12 base rules)"
-echo -e "  ✓ .vibe-check/constitutions/ (7 work-type templates - optional)"
 echo -e "  ✓ .vibe-check/enhanced-mcp-server/ (built and ready)"
 echo -e "  ✓ .mcp.json (MCP configuration)"
 echo ""

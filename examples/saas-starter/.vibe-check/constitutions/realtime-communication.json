@@ -1,0 +1,21 @@
+{
+  "name": "Real-time Communication",
+  "description": "Rules for WebSocket, real-time updates, and bidirectional communication (auto-generated for saas-starter)",
+  "workTypes": [
+    "realtime",
+    "websocket",
+    "socket",
+    "sse"
+  ],
+  "rules": [
+    "HIGH: Follow Real-time Communication best practices",
+    "MEDIUM: Document Real-time Communication decisions and architecture",
+    "MEDIUM: Test Real-time Communication functionality thoroughly"
+  ],
+  "antiPatterns": [],
+  "guidelines": {
+    "confidence": "high",
+    "evidence": "Detected real-time libraries",
+    "generated": "Auto-generated based on codebase analysis"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Workflow & Automation",
+  "description": "Constitutional rules for browser automation, Playwright, and workflow engines (customized for saas-starter)",
+  "workTypes": [
+    "workflow",
+    "automation",
+    "playwright",
+    "puppeteer",
+    "selenium",
+    "runner"
+  ],
+  "rules": [
+    "CRITICAL: Implement proper error handling with retry logic",
+    "CRITICAL: Use proper wait strategies (not arbitrary sleeps)",
+    "HIGH: Use stable selectors (data-testid, role, label) over fragile CSS selectors",
+    "HIGH: Add timeout configuration for all operations",
+    "HIGH: Implement graceful degradation for failed automation steps",
+    "HIGH: Clean up resources (close browsers, delete temp files) after execution",
+    "MEDIUM: Add logging and tracing for debugging failed workflows",
+    "MEDIUM: Use page object model pattern for maintainable automation code",
+    "MEDIUM: Implement retry mechanism for transient failures",
+    "MEDIUM: Add screenshots or videos for failed automation runs"
+  ],
+  "antiPatterns": [
+    "Using sleep() instead of proper wait conditions",
+    "Fragile CSS selectors that break on UI changes",
+    "Missing error handling/retry logic",
+    "No resource cleanup (leaked browser instances)",
+    "No logging for debugging failures",
+    "Hardcoded waits and timeouts"
+  ],
+  "guidelines": {
+    "selectors": "Prefer data-testid > role > label > CSS selectors",
+    "waits": "Use waitForSelector, waitForNavigation, not arbitrary sleeps",
+    "errorHandling": "Capture screenshots and logs on failure for debugging"
+  }
+}

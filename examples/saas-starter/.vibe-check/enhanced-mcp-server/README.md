@@ -57,139 +57,77 @@ git clone https://github.com/ArtificialMonks/vibe-workflow
 cd vibe-workflow
 
 # 2. Run initialization script (sets up everything automatically)
-bash init.sh /path/to/your/project
+./init.sh /path/to/your/project
 
-# 3. (Optional) Generate intelligent constitutional templates from your CLAUDE.md
+# 3. Generate intelligent constitutional templates (🔥 NEW!)
 cd /path/to/your/project/.vibe-check/enhanced-mcp-server
 npx tsx scripts/intelligent-constitution-generator.ts /path/to/your/project
 
-# 4. Add your Gemini API key to .mcp.json (if not entered during init)
+# This analyzes your codebase, discovers work types, customizes templates,
+# and generates new templates for specialized domains (ML, blockchain, etc.)
+
+# 4. Add your Gemini API key to .mcp.json
 # 5. Restart Claude Code
 ```
 
-### What Gets Installed
+**What the init script does:**
+- ✅ Creates `.vibe-check/` directory structure
+- ✅ Copies enhanced MCP server to your project
+- ✅ Copies 12 universal base constitutional rules
+- ✅ Installs dependencies
+- ✅ Builds the MCP server
+- ✅ Creates `.mcp.json` configuration
+- ✅ Runs validation
 
-**The init script creates a complete, production-ready installation:**
+**What intelligent generation does:**
+- 🧠 Analyzes ENTIRE codebase (package.json, CLAUDE.md, directory structure)
+- 🧠 Discovers work types YOU need (ML, blockchain, payments, auth, etc.)
+- 🧠 Customizes 7 standard templates with YOUR project rules
+- 🧠 Generates NEW templates for discovered specialized domains
+- 🧠 Extracts rules from CLAUDE.md by section/work-type
+- 🧠 Creates 100% project-aware constitutional system
 
-#### 1. **Enhanced MCP Server** (`.vibe-check/enhanced-mcp-server/`)
-- ✅ Full TypeScript source code (`src/`)
-- ✅ Compiled JavaScript ready to run (`build/`)
-- ✅ All helper scripts for intelligent generation
-- ✅ Complete package with dependencies installed
-
-#### 2. **Base Constitutional Rules** (`.vibe-check/shared/`) 🆕
-- ✅ **12 foundational rules** that apply to ALL projects
-  - 5 CRITICAL rules (Vitest-only, NestJS 10.4.20, pg.Pool, security, deployment)
-  - 5 HIGH priority rules (TypeScript strict, testing, error handling, code review, accessibility)
-  - 2 MEDIUM rules (documentation, performance)
-- ✅ **JSON Schema** for rule validation (VS Code integration)
-- ✅ **Inheritance system** - Your project rules extend base rules
-
-#### 3. **Generic Work-Type Templates** (`.vibe-check/constitutions/`)
-- ✅ **7 project-agnostic templates** ready to customize:
-  - `api-development.json` - REST API standards
-  - `database-migrations.json` - Schema change patterns
-  - `testing.json` - Test coverage and quality
-  - `deployment.json` - Production deployment safety
-  - `integration-development.json` - Third-party integrations
-  - `ui-components.json` - Frontend component standards
-  - `workflow-automation.json` - Browser automation patterns
-
-#### 4. **Project-Specific Configuration**
-- ✅ `constitutional-rules.json` - Your project's custom rules
-- ✅ `.mcp.json` - MCP server configuration with absolute paths
-- ✅ Auto-created on first use: `history-{projectName}.json`, `vibe-log-{projectName}.json`
-
-### Intelligent Constitutional Generation (Optional)
-
-**After initialization, you can auto-generate customized rules:**
-
-```bash
-cd /path/to/your/project/.vibe-check/enhanced-mcp-server
-npx tsx scripts/intelligent-constitution-generator.ts /path/to/your/project
-```
-
-**What it does:**
-- 🧠 **Analyzes codebase** - Scans `package.json`, `CLAUDE.md`, directory structure
-- 🧠 **Discovers work types** - Detects ML, blockchain, payments, auth, realtime, GraphQL
-- 🧠 **Customizes templates** - Merges generic rules with your project-specific patterns
-- 🧠 **Generates new templates** - Creates templates for discovered specialized domains
-- 🧠 **Extracts rules from CLAUDE.md** - Maps sections to work-type templates automatically
-- 🧠 **100% project-aware** - Complete constitutional system tailored to YOUR project
-
-**Example output:**
-```
-Analyzed codebase: NestJS, React, Prisma, Stripe detected
-Discovered 3 new work types: payment-processing, auth-security, realtime-communication
-Extracted 89 rules from CLAUDE.md
-Customized 7 templates with project-specific rules
-Generated 3 new templates
-Total: 10 templates with 168 rules ✅
-```
-
-**See [SETUP.md](SETUP.md) for detailed installation guide and [examples/saas-starter/](examples/saas-starter/) for a complete working example.**
+**See [SETUP.md](SETUP.md) for detailed installation guide.**
 
 ---
 
 ## 🏗️ Directory Structure After Installation
 
-**After running `init.sh`, your project will have this structure:**
-
 ```
 your-project/
-├── .vibe-check/                           # Created by init.sh
-│   ├── constitutional-rules.json          # ✅ Project-specific rules (auto-generated)
+├── .vibe-check/
+│   ├── constitutional-rules.json          # Project-wide rules (auto-generated)
+│   ├── shared/
+│   │   ├── base-constitutional-rules.json # 12 universal base rules
+│   │   └── schema/
+│   │       └── constitutional-rules.schema.json
 │   │
-│   ├── shared/                            # ✅ Base rules (copied from template/)
-│   │   ├── base-constitutional-rules.json # 12 universal foundational rules
-│   │   ├── schema/
-│   │   │   └── constitutional-rules.schema.json  # JSON Schema for validation
-│   │   └── README.md                      # Documentation
+│   ├── constitutions/                     # Work-type specific rules (optional)
+│   │   ├── database-migrations.json      # Database work rules
+│   │   ├── api-development.json          # API development rules
+│   │   ├── ui-components.json            # UI component rules
+│   │   ├── testing.json                  # Testing & QA rules
+│   │   ├── deployment.json               # Deployment rules
+│   │   ├── integration-development.json   # Integration rules
+│   │   ├── workflow-automation.json       # Automation rules
+│   │   └── README.md                     # Templates guide
 │   │
-│   ├── constitutions/                     # ✅ Work-type templates (copied from template/)
-│   │   ├── api-development.json           # REST API standards
-│   │   ├── database-migrations.json       # Schema change patterns
-│   │   ├── testing.json                   # Test coverage and quality
-│   │   ├── deployment.json                # Production deployment safety
-│   │   ├── integration-development.json    # Third-party integrations
-│   │   ├── ui-components.json             # Frontend component standards
-│   │   ├── workflow-automation.json        # Browser automation patterns
-│   │   └── README.md                      # Templates guide
+│   ├── enhanced-mcp-server/               # This MCP server (built)
+│   │   ├── build/
+│   │   ├── src/
+│   │   └── package.json
 │   │
-│   ├── enhanced-mcp-server/               # ✅ Complete MCP server (copied from template/)
-│   │   ├── build/                         # Compiled JavaScript (ready to run)
-│   │   ├── src/                           # TypeScript source code
-│   │   ├── scripts/                       # Helper scripts
-│   │   │   ├── intelligent-constitution-generator.ts
-│   │   │   ├── load-work-type-constitution.ts
-│   │   │   └── generate-rules-from-docs.ts
-│   │   ├── node_modules/                  # Dependencies (npm install)
-│   │   ├── package.json
-│   │   └── tsconfig.json
-│   │
-│   ├── history-your-project.json          # ⏳ Auto-created on first vibe_check
-│   └── vibe-log-your-project.json         # ⏳ Auto-created on first vibe_learn
+│   ├── history-your-project.json          # Auto-created on first vibe_check
+│   └── vibe-log-your-project.json         # Auto-created on first vibe_learn
 │
-└── .mcp.json                              # ✅ MCP configuration (auto-created by init.sh)
+└── .mcp.json                              # MCP configuration (create manually)
 ```
-
-**Legend:**
-- ✅ Created by `init.sh` during installation
-- ⏳ Auto-created on first use (runtime)
 
 ---
 
 ## ⚙️ Configuration
 
-### Automatic Configuration (via init.sh)
-
-**The `init.sh` script automatically creates all configuration files with absolute paths.**
-
-You don't need to manually create these files - they're generated during installation.
-
-### 1. `.mcp.json` (Auto-Created)
-
-**The init script creates this file with correct absolute paths:**
+### 1. Create `.mcp.json` in your project root
 
 ```json
 {
@@ -215,11 +153,11 @@ You don't need to manually create these files - they're generated during install
 }
 ```
 
-**Note:** You only need to add your Gemini API key if you didn't enter it during `init.sh`.
+**Important:** Use **absolute paths** for all file references.
 
-### 2. `constitutional-rules.json` (Auto-Created)
+### 2. Create constitutional rules file
 
-**The init script creates this file with your project name:**
+Create `.vibe-check/constitutional-rules.json`:
 
 ```json
 {
@@ -265,29 +203,22 @@ No manual configuration needed! Each project automatically gets isolated storage
 
 ## 📚 File-Based Constitutional Rules with Inheritance
 
-### Base Rules (12 Universal Foundational Rules)
+### Base Rules (12 Universal)
 
 Located in `.vibe-check/shared/base-constitutional-rules.json`:
 
-**CRITICAL Rules (5):**
-1. **vitest-only** - Always use Vitest for testing (NEVER Jest)
-2. **nestjs-version-pinning** - Use NestJS 10.4.20 exactly (NEVER 11.x)
-3. **database-with-pg-pool** - Use pg.Pool for PostgreSQL (NEVER TypeORM in NestJS)
-4. **security-best-practices** - Follow OWASP security guidelines
-5. **deployment-safety** - Test in staging before production
-
-**HIGH Priority Rules (5):**
-6. **typescript-strict-mode** - Enable TypeScript strict mode
-7. **test-before-commit** - Run tests before committing code
-8. **explicit-error-handling** - Always handle errors explicitly
-9. **code-review-standards** - Require code review before merging
-10. **accessibility-requirements** - Meet WCAG 2.1 Level AA standards
-
-**MEDIUM Priority Rules (2):**
-11. **documentation-requirements** - Document public APIs and decisions
-12. **performance-considerations** - Profile before optimizing
-
-These rules apply to **ALL projects** and are inherited automatically.
+1. **No Time Constraints** (CRITICAL)
+2. **Read Before Edit** (CRITICAL)
+3. **Parallel Tool Execution** (HIGH)
+4. **Critical Assessment Approach** (HIGH)
+5. **Evidence-Based Conclusions** (HIGH)
+6. **Substance Over Praise** (MEDIUM)
+7. **Use Task Tool for Open-Ended Search** (MEDIUM)
+8. **Use Specialized Tools Over Bash** (MEDIUM)
+9. **NO Automated Code Modification Scripts** (CRITICAL)
+10. **Single Source of Truth for MCP** (HIGH)
+11. **TodoWrite for Complex Tasks** (MEDIUM)
+12. **Read Source Documentation First** (HIGH)
 
 ### Project Rules (Your Custom)
 

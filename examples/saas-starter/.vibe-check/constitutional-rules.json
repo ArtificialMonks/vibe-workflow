@@ -1,0 +1,22 @@
+{
+  "$schema": "shared/schema/constitutional-rules.schema.json",
+  "version": "1.0.0",
+  "extends": ["shared/base-constitutional-rules.json"],
+  "description": "Constitutional rules for saas-starter project",
+  "rules": {
+    "saas-starter-rule-1": {
+      "id": "saas-starter-rule-1",
+      "name": "saas-starter Project Rule Example",
+      "description": "ALWAYS follow saas-starter-specific patterns and conventions",
+      "category": "best-practices",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Ensures consistency across saas-starter codebase",
+      "examples": [
+        "Follow saas-starter coding standards",
+        "Use saas-starter approved libraries and frameworks"
+      ]
+    }
+  },
+  "overrides": {}
+}

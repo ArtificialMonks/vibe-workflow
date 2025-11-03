@@ -1,0 +1,84 @@
+{
+  "name": "@artificialmonks/vibe-check-mcp-enhanced",
+  "mcpName": "io.github.artificialmonks/vibe-check-mcp-enhanced",
+  "version": "2.8.0-enhanced.1",
+  "description": "Enhanced vibe-check MCP with file-based constitutional rules, inheritance support, and per-project storage configuration",
+  "main": "build/index.js",
+  "type": "module",
+  "packageManager": "npm@10.8.2",
+  "bin": {
+    "vibe-check-mcp": "build/cli/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"const fs=require('fs');['build/index.js','build/cli/index.js','build/cli/validate.js'].forEach((f)=>{if(fs.existsSync(f)){fs.chmodSync(f,0o755);}})\"",
+    "prepare": "npm run build",
+    "start": "node build/index.js",
+    "dev": "tsc-watch --onSuccess \"node build/index.js\"",
+    "pretest": "npm run build",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "security-check": "node scripts/security-check.cjs",
+    "prepublishOnly": "npm run build",
+    "sync-version": "node scripts/sync-version.mjs",
+    "validate": "npm run build && node build/cli/validate.js",
+    "validate:watch": "tsc-watch --onSuccess \"node build/cli/validate.js\""
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.17.1",
+    "@modelcontextprotocol/sdk": "^1.16.0",
+    "axios": "^1.12.2",
+    "body-parser": "^1.20.2",
+    "commander": "^12.1.0",
+    "cors": "^2.8.5",
+    "diff": "^5.2.0",
+    "dotenv": "^16.4.7",
+    "execa": "^9.5.1",
+    "express": "^4.19.2",
+    "openai": "^4.68.1",
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/diff": "^7.0.2",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.17.25",
+    "@types/semver": "^7.7.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "tsc-watch": "^6.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "vibe-check",
+    "vibe-coding",
+    "metacognition",
+    "ai-alignment",
+    "llm-agents",
+    "autonomous-agents",
+    "reflection",
+    "agent-oversight",
+    "ai-safety",
+    "prompt-engineering"
+  ],
+  "author": "PV Bhat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PV-Bhat/vibe-check-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PV-Bhat/vibe-check-mcp-server/issues"
+  },
+  "homepage": "https://github.com/PV-Bhat/vibe-check-mcp-server#readme",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

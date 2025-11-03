@@ -1,0 +1,55 @@
+{
+  "name": "Deployment & DevOps",
+  "description": "Constitutional rules for deployment, CI/CD, and production operations (customized for saas-starter)",
+  "workTypes": [
+    "deployment",
+    "devops",
+    "ci",
+    "cd",
+    "production",
+    "release"
+  ],
+  "rules": [
+    "CRITICAL: Run full test suite before deployment (zero test failures required)",
+    "CRITICAL: Create database backup before running migrations in production",
+    "CRITICAL: Verify environment variables are set correctly",
+    "CRITICAL: Never deploy with hardcoded credentials or secrets",
+    "HIGH: Test deployment in staging environment first",
+    "HIGH: Use container hostnames (not localhost) for production services",
+    "HIGH: Implement health check endpoints for monitoring",
+    "HIGH: Set up rollback plan before deployment",
+    "HIGH: Verify observability tools are working (logging, metrics, monitoring)",
+    "MEDIUM: Run security audit before production deployment",
+    "MEDIUM: Document deployment steps and configuration changes",
+    "MEDIUM: Use infrastructure as code (Terraform, CloudFormation, Docker Compose)",
+    "CRITICAL: Run full test suite before deployment",
+    "CRITICAL: Verify all environment variables are set correctly",
+    "CRITICAL: Create database backup before running migrations in production",
+    "HIGH: Use zero-downtime deployment strategy",
+    "HIGH: Implement health checks for readiness/liveness probes",
+    "HIGH: Set up automated rollback on deployment failure",
+    "MEDIUM: Monitor error rates and performance metrics",
+    "MEDIUM: Run smoke tests in production environment",
+    "MEDIUM: Document deployment and rollback procedures",
+    "HIGH: Run `npm run typecheck` before committing",
+    "HIGH: Run `npm run lint` to catch code issues",
+    "HIGH: Run `npm run format` with Prettier for consistency",
+    "CRITICAL: Use `any` type in TypeScript (use `unknown` instead)",
+    "CRITICAL: Commit console.log statements to production code",
+    "CRITICAL: Use deprecated NestJS decorators or patterns",
+    "CRITICAL: Hardcode environment-specific values"
+  ],
+  "antiPatterns": [
+    "Deploying with failing tests",
+    "Using localhost for service connections in production config",
+    "Direct production deploy without staging test",
+    "Missing environment variable validation",
+    "No database backup before migrations",
+    "Skipping migration preflight checks"
+  ],
+  "guidelines": {
+    "process": "Staging → Production pipeline with automated checks",
+    "monitoring": "Set up alerts for critical errors and performance issues",
+    "rollback": "Always have a tested rollback procedure ready"
+  }
+}

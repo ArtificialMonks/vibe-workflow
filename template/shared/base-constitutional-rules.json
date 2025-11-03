@@ -1,0 +1,259 @@
+{
+  "$schema": "schema/constitutional-rules.schema.json",
+  "version": "1.0.0",
+  "description": "Base constitutional rules applicable to all projects using vibe-workflow",
+  "rules": {
+    "vitest-only": {
+      "id": "vitest-only",
+      "name": "VITEST-ONLY Testing Framework",
+      "description": "CRITICAL: Always use Vitest for ALL testing (NEVER Jest). Use vi.fn() not jest.fn(), vitest.config.ts not jest.config.js",
+      "category": "testing",
+      "severity": "CRITICAL",
+      "enabled": true,
+      "rationale": "Jest compatibility issues with modern ES modules and tooling. Vitest provides better TypeScript support, faster execution, and ESM compatibility",
+      "examples": [
+        "Use: import { vi, describe, it, expect } from 'vitest'",
+        "Use: vi.fn() for mocks",
+        "Use: vitest.config.ts for configuration",
+        "NEVER: import { jest } from '@jest/globals'",
+        "NEVER: jest.fn() or jest.mock()"
+      ],
+      "antiPatterns": [
+        "Using Jest in any form",
+        "Mixing Jest and Vitest",
+        "jest.config.js files"
+      ]
+    },
+    "nestjs-version-pinning": {
+      "id": "nestjs-version-pinning",
+      "name": "NestJS Version Pinning",
+      "description": "CRITICAL: Use NestJS 10.4.20 exactly (NEVER 11.x). NestJS 11.x has lifecycle hang issues",
+      "category": "dependencies",
+      "severity": "CRITICAL",
+      "enabled": true,
+      "rationale": "NestJS 11.x introduces breaking changes and lifecycle hangs in certain scenarios. Version 10.4.20 is stable and production-tested",
+      "examples": [
+        "package.json: \"@nestjs/core\": \"10.4.20\"",
+        "package.json: \"@nestjs/common\": \"10.4.20\"",
+        "NEVER: \"@nestjs/core\": \"^11.0.0\""
+      ],
+      "antiPatterns": [
+        "Using NestJS 11.x",
+        "Using caret (^) or tilde (~) version ranges for NestJS",
+        "Upgrading NestJS without testing thoroughly"
+      ]
+    },
+    "database-with-pg-pool": {
+      "id": "database-with-pg-pool",
+      "name": "Database with pg.Pool",
+      "description": "CRITICAL: Use pg.Pool for PostgreSQL connections in NestJS (NEVER TypeORM). Inject with @Inject('PG_POOL')",
+      "category": "database",
+      "severity": "CRITICAL",
+      "enabled": true,
+      "rationale": "TypeORM causes lifecycle issues with NestJS. pg.Pool provides direct, predictable database access with better performance",
+      "examples": [
+        "constructor(@Inject('PG_POOL') private db: Pool) {}",
+        "await this.db.query('SELECT * FROM users WHERE id = $1', [userId])",
+        "NEVER: @InjectRepository(UserEntity)"
+      ],
+      "antiPatterns": [
+        "Using @nestjs/typeorm",
+        "Using TypeORM entities in NestJS",
+        "Using @InjectRepository decorator"
+      ]
+    },
+    "typescript-strict-mode": {
+      "id": "typescript-strict-mode",
+      "name": "TypeScript Strict Mode",
+      "description": "HIGH: Enable TypeScript strict mode in tsconfig.json for type safety",
+      "category": "code-quality",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Strict mode catches type errors at compile time, preventing runtime bugs and improving code maintainability",
+      "examples": [
+        "tsconfig.json: \"strict\": true",
+        "Use explicit types for function parameters and return values",
+        "Avoid 'any' type - use 'unknown' or proper types"
+      ],
+      "antiPatterns": [
+        "Using 'any' type extensively",
+        "Disabling strict mode",
+        "Using @ts-ignore without explanation"
+      ]
+    },
+    "test-before-commit": {
+      "id": "test-before-commit",
+      "name": "Test Before Commit",
+      "description": "HIGH: Always run tests before committing code. Ensure all tests pass and coverage meets minimum thresholds",
+      "category": "testing",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Pre-commit testing catches bugs early and prevents broken code from entering the codebase",
+      "examples": [
+        "Run: npm run test before git commit",
+        "Run: npm run typecheck for type safety",
+        "Maintain minimum 80% test coverage"
+      ],
+      "antiPatterns": [
+        "Committing without running tests",
+        "Skipping failing tests",
+        "Ignoring test coverage drops"
+      ]
+    },
+    "explicit-error-handling": {
+      "id": "explicit-error-handling",
+      "name": "Explicit Error Handling",
+      "description": "HIGH: Always handle errors explicitly. Use try-catch blocks, error boundaries, and proper error types",
+      "category": "error-handling",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Explicit error handling prevents crashes, improves debugging, and provides better user experience",
+      "examples": [
+        "Use try-catch for async operations",
+        "Define custom error classes for domain errors",
+        "Return structured error responses: { code, message, details }",
+        "Use error boundaries in React components"
+      ],
+      "antiPatterns": [
+        "Swallowing errors silently (empty catch blocks)",
+        "Using generic Error without context",
+        "Not logging errors"
+      ]
+    },
+    "security-best-practices": {
+      "id": "security-best-practices",
+      "name": "Security Best Practices",
+      "description": "CRITICAL: Follow OWASP security guidelines. Validate inputs, sanitize outputs, use parameterized queries, encrypt sensitive data",
+      "category": "security",
+      "severity": "CRITICAL",
+      "enabled": true,
+      "rationale": "Security vulnerabilities can lead to data breaches, financial loss, and legal liability. Prevention is critical",
+      "examples": [
+        "Use parameterized SQL queries (prevent SQL injection)",
+        "Validate all user inputs with Zod or class-validator",
+        "Hash passwords with bcrypt (salt rounds 12+)",
+        "Use HTTPS in production (enforce with HSTS headers)",
+        "Implement rate limiting on authentication endpoints",
+        "Sanitize HTML to prevent XSS attacks"
+      ],
+      "antiPatterns": [
+        "String concatenation in SQL queries",
+        "Storing passwords in plaintext",
+        "Not validating user input",
+        "Exposing sensitive data in API responses"
+      ]
+    },
+    "documentation-requirements": {
+      "id": "documentation-requirements",
+      "name": "Documentation Requirements",
+      "description": "MEDIUM: Document all public APIs, complex algorithms, and architectural decisions. Use JSDoc for functions",
+      "category": "documentation",
+      "severity": "MEDIUM",
+      "enabled": true,
+      "rationale": "Good documentation improves onboarding, reduces maintenance burden, and prevents knowledge loss",
+      "examples": [
+        "Use JSDoc comments for public functions",
+        "Document API endpoints with OpenAPI/Swagger",
+        "Maintain CLAUDE.md with project-specific guidelines",
+        "Document architectural decisions in ADR format"
+      ],
+      "antiPatterns": [
+        "No comments for complex logic",
+        "Outdated documentation",
+        "Missing API documentation"
+      ]
+    },
+    "code-review-standards": {
+      "id": "code-review-standards",
+      "name": "Code Review Standards",
+      "description": "HIGH: Require code review before merging. Review for correctness, readability, security, and performance",
+      "category": "process",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Code review catches bugs, improves code quality, shares knowledge, and maintains consistency",
+      "examples": [
+        "All PRs require at least 1 approval",
+        "Review checklist: tests, types, security, performance",
+        "Provide constructive feedback",
+        "Address all review comments before merging"
+      ],
+      "antiPatterns": [
+        "Self-merging without review",
+        "Rubber-stamp approvals",
+        "Ignoring review feedback"
+      ]
+    },
+    "performance-considerations": {
+      "id": "performance-considerations",
+      "name": "Performance Considerations",
+      "description": "MEDIUM: Profile before optimizing. Measure performance metrics and optimize bottlenecks, not assumptions",
+      "category": "performance",
+      "severity": "MEDIUM",
+      "enabled": true,
+      "rationale": "Premature optimization wastes time. Profile-driven optimization targets real bottlenecks",
+      "examples": [
+        "Use profiling tools (Chrome DevTools, Node.js profiler)",
+        "Measure before and after optimization",
+        "Add indexes for frequently queried database columns",
+        "Implement caching for expensive operations",
+        "Use pagination for large data sets"
+      ],
+      "antiPatterns": [
+        "Optimizing without profiling",
+        "Micro-optimizations that harm readability",
+        "Not measuring performance impact"
+      ]
+    },
+    "accessibility-requirements": {
+      "id": "accessibility-requirements",
+      "name": "Accessibility Requirements",
+      "description": "HIGH: Meet WCAG 2.1 Level AA standards. Use semantic HTML, ARIA labels, keyboard navigation, and screen reader support",
+      "category": "accessibility",
+      "severity": "HIGH",
+      "enabled": true,
+      "rationale": "Accessibility is a legal requirement in many jurisdictions and ensures inclusive user experience",
+      "examples": [
+        "Use semantic HTML (header, nav, main, footer)",
+        "Add alt text for images",
+        "Ensure keyboard navigation works",
+        "Test with screen readers (VoiceOver, NVDA)",
+        "Maintain color contrast ratios (4.5:1 for text)"
+      ],
+      "antiPatterns": [
+        "Using divs for buttons",
+        "Missing alt text",
+        "No keyboard navigation",
+        "Poor color contrast"
+      ]
+    },
+    "deployment-safety": {
+      "id": "deployment-safety",
+      "name": "Deployment Safety",
+      "description": "CRITICAL: Test in staging before production. Create backups, use zero-downtime deployments, implement rollback strategy",
+      "category": "deployment",
+      "severity": "CRITICAL",
+      "enabled": true,
+      "rationale": "Production deployments affect real users. Safety checks prevent outages and data loss",
+      "examples": [
+        "Deploy to staging first, verify functionality",
+        "Create database backup before migrations",
+        "Use blue-green or rolling deployments",
+        "Implement health checks for readiness probes",
+        "Have rollback plan ready",
+        "Monitor error rates after deployment"
+      ],
+      "antiPatterns": [
+        "Deploying directly to production",
+        "No backup before migrations",
+        "No rollback strategy",
+        "Not monitoring post-deployment"
+      ]
+    }
+  },
+  "metadata": {
+    "author": "Vibe-Workflow Project",
+    "lastUpdated": "2024-11-03",
+    "applicability": "All projects using vibe-workflow",
+    "version": "1.0.0"
+  }
+}
