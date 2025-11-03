@@ -47,30 +47,43 @@ This enhanced version is designed to run **locally per project**, not as a globa
 
 - Node.js 18.x or higher
 - npm 9.x or higher
+- A Gemini API key (get one at https://makersuite.google.com/app/apikey)
 
-### Installation
+### Quick Install with Initialization Script
 
 ```bash
-# 1. Navigate to your project directory
-cd /path/to/your/project
+# 1. Clone the repository
+git clone https://github.com/ArtificialMonks/vibe-workflow
+cd vibe-workflow
 
-# 2. Create .vibe-check directory structure
-mkdir -p .vibe-check/enhanced-mcp-server
+# 2. Run initialization script (sets up everything automatically)
+./init.sh /path/to/your/project
 
-# 3. Clone or copy this enhanced MCP server
-# (From GitHub repo or local source)
-cp -r /path/to/enhanced-mcp-server/* .vibe-check/enhanced-mcp-server/
+# 3. Generate intelligent rules from your project's CLAUDE.md
+cd /path/to/your/project/.vibe-check/enhanced-mcp-server
+npx tsx scripts/generate-rules-from-docs.ts /path/to/your/project
 
-# 4. Install dependencies
-cd .vibe-check/enhanced-mcp-server
-npm install
-
-# 5. Build the server
-npm run build
-
-# 6. Run validation (optional but recommended)
-npm run validate
+# 4. Add your Gemini API key to .mcp.json
+# 5. Restart Claude Code
 ```
+
+**What the init script does:**
+- ✅ Creates `.vibe-check/` directory structure
+- ✅ Copies enhanced MCP server to your project
+- ✅ Copies 12 universal base constitutional rules
+- ✅ Installs dependencies
+- ✅ Builds the MCP server
+- ✅ Creates `.mcp.json` configuration
+- ✅ Runs validation
+
+**What intelligent rule generation does:**
+- 🧠 Scans your `CLAUDE.md` for zero-tolerance rules (`**NEVER**:`)
+- 🧠 Extracts conventions and patterns (`**ALWAYS**:`)
+- 🧠 Detects frameworks from `package.json`
+- 🧠 Auto-generates project-specific constitutional rules
+- 🧠 Creates rules tailored to YOUR project's needs
+
+**See [SETUP.md](SETUP.md) for detailed installation guide.**
 
 ---
 
